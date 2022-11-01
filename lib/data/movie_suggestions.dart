@@ -33,8 +33,8 @@ List movieSuggestions = [
     'movie_data': [
       Movie(
         imgUrl:
-            'https://imgs.search.brave.com/skO9NlDyI_rqJrsvSxb7TUWqjMvvPnk_kB1famjLxTw/rs:fit:770:1100:1/g:ce/aHR0cDovL2Nkbi5j/b2xsaWRlci5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMTgv/MDQvc29sby1hLXN0/YXItd2Fycy1zdG9y/eS11ay1wb3N0ZXIu/anBn',
-        name: 'Solo Star Wars',
+            'https://lumiere-a.akamaihd.net/v1/images/p_frozen_18373_3131259c.jpeg',
+        name: 'Frozen',
       ),
       Movie(
           imgUrl:
@@ -58,6 +58,10 @@ List movieSuggestions = [
           imgUrl:
               'https://imgs.search.brave.com/4HISDGGs5OzgE3NMVRlEO2bwWF9Yng2yb76D7p5Yhmk/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly93d3cu/dGhlbW92aWVkYi5v/cmcvdC9wL29yaWdp/bmFsLzlTcElncndX/OHZSazFSVXVzdmFu/T1JqNzVvYy5qcGc',
           name: 'The sleeping beauty'),
+      Movie(
+          imgUrl:
+              'https://upload.wikimedia.org/wikipedia/en/9/98/Coco_%282017_film%29_poster.jpg',
+          name: 'Poco')
     ]
   },
   {

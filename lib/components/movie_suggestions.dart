@@ -12,26 +12,33 @@ class MovieSuggestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: movieSuggestions.length,
-      itemBuilder: (context, index) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(movieSuggestions.elementAt(index)['row_name'],
-                style: headingText2),
-            const SizedBox(height: 8),
-            SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: Row(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: movieSuggestions.length,
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(movieSuggestions.elementAt(index)['row_name'],
+                  style: headingText2),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Row(
                   children: getMovieTiles(
-                      movieSuggestions: movieSuggestions, index: index)),
-            )
-          ],
-        );
-      },
+                      movieSuggestions: movieSuggestions, index: index),
+                ),
+              ),
+              const SizedBox(height: 16)
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -39,12 +46,16 @@ class MovieSuggestions extends StatelessWidget {
       {required List movieSuggestions, required int index}) {
     final List currMovieData = movieSuggestions.elementAt(index)['movie_data'];
     final bool isExpanded = movieSuggestions.elementAt(index)['isExpanded'];
+    final bool isKeepWatching =
+        movieSuggestions.elementAt(index)['row_name'] == 'Keep watching'
+            ? true
+            : false;
     List<Widget> movieTiles = [];
     for (var i = 0; i < currMovieData.length; i++) {
       final Movie currMovie = currMovieData.elementAt(i);
       movieTiles.add(
         Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.only(right: 8),
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             placeholder: (context, url) {
@@ -61,13 +72,40 @@ class MovieSuggestions extends StatelessWidget {
             width: isExpanded ? 200 : 130,
             fadeInCurve: Curves.easeIn,
             imageBuilder: (context, imageProvider) {
-              return Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Image(image: imageProvider, fit: BoxFit.cover),
-              );
+              return isKeepWatching
+                  ? Stack(
+                      children: [
+                        Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Image(image: imageProvider),
+                        ),
+                        Positioned(
+                          width: 125,
+                          bottom: 20,
+                          child: Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: LinearProgressIndicator(
+                                backgroundColor: white50.withOpacity(0.5),
+                                color: Colors.white,
+                                value: 0.3,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  : Container(
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Image(image: imageProvider, fit: BoxFit.cover),
+                    );
             },
             imageUrl: currMovie.imgUrl,
           ),

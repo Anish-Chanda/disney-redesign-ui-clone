@@ -18,7 +18,10 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        //Background image
         Image.asset('assets/images/luca.png'),
+
+        //fade out effect container
         Positioned(
           bottom: 0,
           child: Container(
@@ -36,20 +39,24 @@ class Header extends StatelessWidget {
             ),
           ),
         ),
+
+        //Profile picture
         Positioned(
-            right: 8,
-            top: 8,
-            child: CachedNetworkImage(
-                fadeInCurve: Curves.easeIn,
-                fit: BoxFit.cover,
-                imageBuilder: (context, imageProvider) {
-                  return CircleAvatar(
-                    backgroundImage: imageProvider,
-                    radius: 30,
-                  );
-                },
-                imageUrl:
-                    'https://imgs.search.brave.com/cN8waO0zxqcPpSzcgMOX0HknaUInJtGxsl6aEbewvrw/rs:fit:1200:1024:1/g:ce/aHR0cHM6Ly9pbWFn/ZXMud2FsbHBhcGVy/c2Rlbi5jb20vaW1h/Z2UvZG93bmxvYWQv/YmFieS15b2RhLWZh/bmFydC0yMDE5X2Ey/eHRaV2FVbVpxYXJh/V2twSlJuYW10bHJX/WmxaMmsuanBn')),
+          right: 8,
+          top: 8,
+          child: CachedNetworkImage(
+              fadeInCurve: Curves.easeIn,
+              fit: BoxFit.cover,
+              imageBuilder: (context, imageProvider) {
+                return CircleAvatar(
+                  backgroundImage: imageProvider,
+                  radius: 25,
+                );
+              },
+              imageUrl: profileImageUrl),
+        ),
+
+        //Row of buttons
         Positioned(
           bottom: 75,
           right: 70,
