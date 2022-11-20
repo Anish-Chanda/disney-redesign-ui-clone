@@ -9,7 +9,6 @@ class MoreLikeThis extends StatelessWidget {
   const MoreLikeThis({
     super.key,
     required this.movieData,
-    
   });
 
   final List<Movie> movieData;

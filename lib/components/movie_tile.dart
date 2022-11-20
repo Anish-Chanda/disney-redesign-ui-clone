@@ -24,13 +24,31 @@ class MovieTile extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MovieScreen(
+            context,
+            PageRouteBuilder(
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(0.0, 1.0);
+                const end = Offset.zero;
+                var curve = Curves.easeIn;
+                var curveTween = CurveTween(curve: curve);
+                final tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                final offsetAnimation = animation.drive(tween);
+
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return MovieScreen(
                   imageUrl: currMovie.imgUrl,
                   movie: currMovie,
-                ),
-              ));
+                );
+              },
+            ),
+          );
         },
         child: CachedNetworkImage(
           fit: BoxFit.cover,

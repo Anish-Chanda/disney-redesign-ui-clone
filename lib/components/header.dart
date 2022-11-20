@@ -60,7 +60,6 @@ class Header extends StatelessWidget {
         //Row of buttons
         Positioned(
           bottom: 75,
-          right: 70,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
