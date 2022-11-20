@@ -12,6 +12,18 @@ const headingText2 = TextStyle(
   fontFamily: 'SF Pro Display',
   fontStyle: FontStyle.normal,
 );
+
+const bodyText1 = TextStyle(
+    color: Colors.grey,
+    fontFamily: 'SF Pro Display',
+    fontSize: 15,
+    fontStyle: FontStyle.normal);
+
+const bodyText2 = TextStyle(
+    color: Colors.white,
+    fontFamily: 'SF Pro Display',
+    fontSize: 15,
+    fontStyle: FontStyle.normal);
 const String profileImageUrl =
     'https://imgs.search.brave.com/cN8waO0zxqcPpSzcgMOX0HknaUInJtGxsl6aEbewvrw/rs:fit:1200:1024:1/g:ce/aHR0cHM6Ly9pbWFn/ZXMud2FsbHBhcGVy/c2Rlbi5jb20vaW1h/Z2UvZG93bmxvYWQv/YmFieS15b2RhLWZh/bmFydC0yMDE5X2Ey/eHRaV2FVbVpxYXJh/V2twSlJuYW10bHJX/WmxaMmsuanBn';
 

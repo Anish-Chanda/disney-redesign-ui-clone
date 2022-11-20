@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants.dart';
-import 'circular_icon_button.dart';
+import 'circular_button.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -63,8 +63,8 @@ class Header extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircularIconButton(
-                  backroundColor: white60, icon: FontAwesomeIcons.plus),
+              const CircularButton(
+                  color: white60, icon: Icon(FontAwesomeIcons.plus)),
               const SizedBox(width: 8),
               GestureDetector(
                 child: Container(
@@ -92,8 +92,8 @@ class Header extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const CircularIconButton(
-                  backroundColor: white60, icon: CupertinoIcons.info)
+              const CircularButton(
+                  color: white60, icon: Icon(CupertinoIcons.info))
             ],
           ),
         )
