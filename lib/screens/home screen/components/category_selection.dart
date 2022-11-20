@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../components/circular_icon_button.dart';
+import '../../../components/circular_button.dart';
 import '../../../constants.dart';
 
 class CategorySelection extends StatelessWidget {
@@ -27,13 +27,15 @@ class CategorySelection extends StatelessWidget {
               color: Colors.white,
             )),
         const Spacer(),
-        const CircularIconButton(
-          backroundColor: white20,
-          icon: FontAwesomeIcons.search,
+        const CircularButton(
+          color: white20,
+          icon: Icon(FontAwesomeIcons.search),
         ),
         const SizedBox(width: 8),
-        const CircularIconButton(
-            backroundColor: white20, icon: FontAwesomeIcons.arrowDown),
+        const CircularButton(
+          color: white20,
+          icon: Icon(FontAwesomeIcons.arrowDown),
+        ),
         const SizedBox(width: 8),
       ],
     );

@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:disney_redesign/screens/movie_screen/movie_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../data/movie_suggestions.dart';
 import '../models/movie_model.dart';
+import 'movie_tile.dart';
 
 class MovieSuggestions extends StatelessWidget {
   const MovieSuggestions({
@@ -31,7 +33,9 @@ class MovieSuggestions extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: getMovieTiles(
-                      movieSuggestions: movieSuggestions, index: index),
+                      movieSuggestions: movieSuggestions,
+                      index: index,
+                      context: context),
                 ),
               ),
               const SizedBox(height: 16)
@@ -43,7 +47,9 @@ class MovieSuggestions extends StatelessWidget {
   }
 
   List<Widget> getMovieTiles(
-      {required List movieSuggestions, required int index}) {
+      {required List movieSuggestions,
+      required int index,
+      required BuildContext context}) {
     final List currMovieData = movieSuggestions.elementAt(index)['movie_data'];
     final bool isExpanded = movieSuggestions.elementAt(index)['isExpanded'];
     final bool isKeepWatching =
@@ -54,62 +60,10 @@ class MovieSuggestions extends StatelessWidget {
     for (var i = 0; i < currMovieData.length; i++) {
       final Movie currMovie = currMovieData.elementAt(i);
       movieTiles.add(
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: CachedNetworkImage(
-            fit: BoxFit.cover,
-            placeholder: (context, url) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.grey,
-                  height: isExpanded ? 300 : 200,
-                  width: isExpanded ? 200 : 130,
-                ),
-              );
-            },
-            height: isExpanded ? 300 : 200,
-            width: isExpanded ? 200 : 130,
-            fadeInCurve: Curves.easeIn,
-            imageBuilder: (context, imageProvider) {
-              return isKeepWatching
-                  ? Stack(
-                      children: [
-                        Container(
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image(image: imageProvider),
-                        ),
-                        Positioned(
-                          width: 125,
-                          bottom: 20,
-                          child: Center(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
-                              child: LinearProgressIndicator(
-                                backgroundColor: white50.withOpacity(0.5),
-                                color: Colors.white,
-                                value: 0.3,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  : Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Image(image: imageProvider, fit: BoxFit.cover),
-                    );
-            },
-            imageUrl: currMovie.imgUrl,
-          ),
-        ),
+        MovieTile(
+            currMovie: currMovie,
+            isExpanded: isExpanded,
+            isKeepWatching: isKeepWatching),
       );
     }
     return movieTiles;
